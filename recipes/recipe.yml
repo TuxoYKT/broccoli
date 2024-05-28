@@ -46,8 +46,8 @@ modules:
         - com.github.tchx84.Flatseal
         - com.google.Chrome
         - com.brave.Browser
-        # - com.valvesoftware.Steam
-        # - com.valvesoftware.Steam.CompatibilityTool.Proton-GE
+        - com.valvesoftware.Steam
+        - com.valvesoftware.Steam.CompatibilityTool.Proton-GE
         - com.usebottles.bottles
         - org.remmina.Remmina
         - com.visualstudio.code
