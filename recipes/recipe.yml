@@ -27,6 +27,7 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/sentry/switcheroo-control_discrete/repo/fedora-%OS_VERSION%/sentry-switcheroo-control_discrete-fedora-%OS_VERSION%.repo
     install:
       - fish
+      - fastfetch
       - supergfxctl
       - distrobox
       - zerotier-one
