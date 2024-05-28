@@ -5,4 +5,4 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
-ln -s /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin.zst /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1a_2_hdr.bin.zst
+ln -s /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin.xz /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1a_2_hdr.bin.xz
