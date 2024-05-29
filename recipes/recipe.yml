@@ -4,7 +4,7 @@ name: broccoli
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/kinoite-asus-nvidia
+base-image: ghcr.io/ublue-os/kinoite-base
 image-version: 40 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -17,6 +17,10 @@ modules:
                   # in /usr/etc/ in the image. read more in files module reference.
                   
   - type: script
+    snippets:
+      - "sed -i '0,/enabled=0/s//enabled=1/' /etc/yum.repos.d/rpmfusion-nonfree.repo"
+      - "sed -i '0,/enabled=0/s//enabled=1/' /etc/yum.repos.d/rpmfusion-nonfree-updates.repo"
+      - "sed -i '0,/enabled=0/s//enabled=1/' /etc/yum.repos.d/rpmfusion-nonfree-updates-testing.repo"
     scripts:
       - enable-zerotier-repo.sh # I could have used rpm-ostree module to add the repo. But not sure how to make it accept the ZeroTier's GPG key.
       - fix-mediatek-bt.sh # kernel 6.9.1 broke firmware loading for that card
@@ -26,6 +30,10 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
       - https://copr.fedorainfracloud.org/coprs/sentry/switcheroo-control_discrete/repo/fedora-%OS_VERSION%/sentry-switcheroo-control_discrete-fedora-%OS_VERSION%.repo
     install:
+      - akmod-nvidia 
+      - xorg-x11-drv-nvidia-cuda 
+      - xorg-x11-drv-nvidia-power 
+      - asusctl
       - fish
       - fastfetch
       - supergfxctl
@@ -36,6 +44,10 @@ modules:
       - firefox
       - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
+  - type: script
+    snippets:
+      - "rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1"
+      
   - type: default-flatpaks
     notify: true
     system:
@@ -62,6 +74,9 @@ modules:
   - type: systemd
     system:
       enabled:
+        - nvidia-suspend.service
+        - nvidia-resume.service
+        - nvidia-hibernate.service
         - supergfxd.service
         - zerotier-one.service
 
