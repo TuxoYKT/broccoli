@@ -25,6 +25,7 @@ modules:
     repos:
       - https://copr.fedorainfracloud.org/coprs/lukenukem/asus-linux/repo/fedora-%OS_VERSION%/lukenukem-asus-linux-fedora-%OS_VERSION%.repo
       - https://copr.fedorainfracloud.org/coprs/sentry/switcheroo-control_discrete/repo/fedora-%OS_VERSION%/sentry-switcheroo-control_discrete-fedora-%OS_VERSION%.repo
+      - https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
     install:
       - asusctl
       - fish
@@ -33,6 +34,7 @@ modules:
       - distrobox
       - zerotier-one
       - waydroid
+      - ivpn
     remove:
       - firefox
       - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
@@ -54,6 +56,10 @@ modules:
         - org.remmina.Remmina
         - com.visualstudio.code
         - com.bitwarden.desktop
+        - net.davidotek.pupgui2
+        - io.github.dvlv.boxbuddyrs
+        - io.github.celluloid_player.Celluloid
+        - org.mozilla.Thunderbird
       # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08),
       # only normal flatpak applications are (like Floorp Lightning web browser in this example).
       # Installing different branches of the same Flatpak is not supported.
@@ -68,6 +74,7 @@ modules:
         - nvidia-hibernate.service
         - supergfxd.service
         - zerotier-one.service
+        - ivpn-service.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
