@@ -43,10 +43,6 @@ modules:
     remove:
       - firefox
       - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
-  - type: script
-    snippets:
-      - "rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1"
       
   - type: default-flatpaks
     notify: true
