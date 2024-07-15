@@ -19,7 +19,6 @@ modules:
   - type: script
     scripts:
       - enable-zerotier-repo.sh # I could have used rpm-ostree module to add the repo. But not sure how to make it accept the ZeroTier's GPG key.
-      - fix-mediatek-bt.sh # kernel 6.9.1 broke firmware loading for that card
 
   - type: rpm-ostree
     repos:
